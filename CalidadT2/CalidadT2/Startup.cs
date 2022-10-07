@@ -29,13 +29,13 @@ namespace CalidadT2
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
+
             services.AddDbContext<AppBibliotecaContext>(
                 options => options.UseSqlServer(Configuration.GetConnectionString("DevConnection"))
             );
 
             services.AddTransient<IUsuario, SUsuario>();
-
+            services.AddTransient < IBiblioteca, SBiblioteca>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
