@@ -15,12 +15,11 @@ namespace CalidadT2.Controllers
     [Authorize]
     public class BibliotecaController : Controller
     {
-        private readonly AppBibliotecaContext app;
         private readonly IBiblioteca mBiblioteca;
         private readonly IUsuario mUsuario;
-        public BibliotecaController(AppBibliotecaContext app, IBiblioteca mBiblioteca, IUsuario mUsuario)
+        public BibliotecaController( IBiblioteca mBiblioteca, IUsuario mUsuario)
         {
-            this.app = app;
+
             this.mBiblioteca = mBiblioteca;
             this.mUsuario = mUsuario;
         }
@@ -79,13 +78,6 @@ namespace CalidadT2.Controllers
             TempData["SuccessMessage"] = "Se marco como leyendo el libro";
 
             return RedirectToAction("Index");
-        }
-
-        private Usuario LoggedUser()
-        {
-            var claim = HttpContext.User.Claims.FirstOrDefault();
-            var user = app.Usuarios.Where(o => o.Username == claim.Value).FirstOrDefault();
-            return user;
         }
     }
 }

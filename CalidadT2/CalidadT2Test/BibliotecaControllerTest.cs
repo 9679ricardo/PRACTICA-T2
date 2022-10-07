@@ -41,7 +41,7 @@ namespace CalidadT2Test
             iuser.Setup(u => u.LoggedUser(principal.Claims)).Returns(user);
             ibibli.Setup(b => b.getList(user.Id)).Returns(new List<Biblioteca>());
 
-            var controller = new BibliotecaController(null, ibibli.Object, iuser.Object)
+            var controller = new BibliotecaController( ibibli.Object, iuser.Object)
             {
                 ControllerContext = new ControllerContext()
                 {
@@ -92,7 +92,7 @@ namespace CalidadT2Test
             ibibli.Setup(b => b.cretateNew(1,1)).Returns(biblioteca);
             ibibli.Setup(a => a.addDB(biblioteca));
 
-            var controller = new BibliotecaController(null, ibibli.Object, iuser.Object)
+            var controller = new BibliotecaController(ibibli.Object, iuser.Object)
             {
                 ControllerContext = new ControllerContext()
                 {
@@ -105,7 +105,7 @@ namespace CalidadT2Test
             };
 
             var result = controller.Add(1);
-            Assert.IsInstanceOf<RedirectToRouteResult>(result);
+            Assert.IsInstanceOf<RedirectToActionResult>(result);
             Assert.IsNotInstanceOf<ViewResult>(result);
         }
 
@@ -138,7 +138,7 @@ namespace CalidadT2Test
             iuser.Setup(u => u.LoggedUser(principal.Claims)).Returns(user);
             ibibli.Setup(b => b.marcarComoLeyendo(1, 1));
 
-            var controller = new BibliotecaController(null, ibibli.Object, iuser.Object)
+            var controller = new BibliotecaController( ibibli.Object, iuser.Object)
             {
                 ControllerContext = new ControllerContext()
                 {
@@ -184,7 +184,7 @@ namespace CalidadT2Test
             iuser.Setup(u => u.LoggedUser(principal.Claims)).Returns(user);
             ibibli.Setup(b => b.marcarComoTerminado(1, 1));
 
-            var controller = new BibliotecaController(null, ibibli.Object, iuser.Object)
+            var controller = new BibliotecaController( ibibli.Object, iuser.Object)
             {
                 ControllerContext = new ControllerContext()
                 {
